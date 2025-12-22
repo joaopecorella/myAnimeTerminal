@@ -14,8 +14,7 @@ This system needs a reference title, which is just a fancy way to know what anim
 Later, we use user data provided from **myAnimeList** (not stolen!) to find out what people (before you or I) found to be related to that reference.  
 
 Often, recommendation systems leave what matters behind: the **human component**, quite capable of assuming relations if I do say so. For example, how did you  
-feel when you watched *Akira* for the first time? That feeling of dystopian, mystery and modernism, which may fit Sci-fi genres, but it also can be attributed  
-to other genres as well. And machines often fail to understand that.
+feel when you watched *Akira* for the first time? That feeling of dystopian, mystery and modernism, which may fit Sci-fi genres, but it also can be attributed to other genres as well. And machines often fail to understand that.
 
 ---
 
