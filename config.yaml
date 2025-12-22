@@ -1,0 +1,16 @@
+# Values that will be searched upon. 
+genres: 
+  - Psychological
+  - Action
+  - Mystery
+  - Police
+  - Sci-Fi
+  - Horror
+  - Drama
+  - Supernatural
+studios:
+  - Madhouse
+  - ufotable
+  - MAPPA
+  - Toei Animation
+  - Production I.G
