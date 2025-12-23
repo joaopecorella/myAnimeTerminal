@@ -2,6 +2,8 @@ import pandas as pd
 import numpy as np
 import os
 
+# settings.
+pd.set_option('display.max_rows', None)
 '''
 NOTE: The aplication will look for matching strings to iterate AFTER the first aplication window.
 

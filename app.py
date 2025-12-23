@@ -608,6 +608,7 @@ class AnimeApp(tk.Tk):
 
 
 
+
         button = tk.Button(close_window_frame, text = "HOME", command = lambda: delete_widgets(),
                         background="#39FF14",
                         foreground="#000000",
@@ -650,7 +651,7 @@ class AnimeApp(tk.Tk):
     def favorites_button(self):
 
             """
-            Callback event. Creates a button and commands a ttk.three to spawn containing the user favorite titles.
+            Callback event. Creates a button and commands a ttk.three to spawn containing the user favorite titles. Updates GUI directly.
             """
 
             # variables. 
@@ -702,7 +703,7 @@ class AnimeApp(tk.Tk):
     def delete_favorites_button(self):
 
         """
-        Deletes file containing user favorites.
+        Deletes file containing user favorites. Informs the user about the operation.
         """
         # variables.
         filepath = "saved_titles.csv"
@@ -737,7 +738,6 @@ if __name__ == "__main__":
 # Needs to make sure the font is present in the system.
 # And also, fix the comment section, it's terrible. It may be an overhull needed.
 # Makes sure anime_processing runs begore launch. 
-# Fix the favorite three div asthetic and such.
 
 
 
