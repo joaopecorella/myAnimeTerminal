@@ -50,6 +50,7 @@ class AnimeApp(tk.Tk):
         
         self.favorites_button()
         self.return_to_home()
+        self.delete_favorites_button()
         
         self.update_idletasks()
         
@@ -597,7 +598,7 @@ class AnimeApp(tk.Tk):
         """
             
         close_window_frame = tk.Label(self, borderwidth= 0 )
-        close_window_frame.place(x = 1214, y = 28)
+        close_window_frame.place(x = 1220, y = 28)
 
 
         def delete_widgets():
@@ -685,7 +686,7 @@ class AnimeApp(tk.Tk):
                 
             
             close_window_frame = tk.Label(self, borderwidth= 0 )
-            close_window_frame.place(x = 1170, y = 28)
+            close_window_frame.place(x = 1178, y = 28)
 
             
             button = tk.Button(close_window_frame,
@@ -697,6 +698,36 @@ class AnimeApp(tk.Tk):
                             )
             
             button.pack()
+
+    def delete_favorites_button(self):
+
+        """
+        Deletes file containing user favorites.
+        """
+        # variables.
+        filepath = "saved_titles.csv"
+
+        def favorite_deletion():
+            if os.path.isfile(filepath):
+                os.remove(filepath)
+            else:
+                favorite_status = self.typewritter_effect(text = f"No favorites to delete.", font_size = 28, break_line= 50, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
+                favorite_status.after(550, favorite_status.destroy)
+
+        close_window_frame = tk.Label(self, borderwidth= 0 )
+        close_window_frame.place(x = 1148, y = 28)
+
+
+            
+        button = tk.Button(close_window_frame,
+                               text = "DEL",
+                               command = lambda: favorite_deletion(),
+                               background="#39FF14",
+                               foreground="#000000",
+                               font=("Flexi IBM VGA True", 11)
+                            )
+            
+        button.pack()
 
 
 if __name__ == "__main__":
