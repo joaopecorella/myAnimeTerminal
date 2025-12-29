@@ -22,7 +22,7 @@ class AnimeApp(tk.Tk):
         super().__init__()
 
         self.title("myAnimeTerminal")
-        self.geometry(f"1284x820+200+0")
+        self.geometry(f"1280x854+200+0")
         self.resizable(False, False)
         self.configure(background= "#000000", borderwidth = 0.0)
         
@@ -39,7 +39,7 @@ class AnimeApp(tk.Tk):
             "casey_computer_name": casey_computer_name, 
             "fugitive": fugitive}
         
-        self.image_loader(filepath = r"misc\actual_design_recent.png", x_loc = 0, y_loc = 0)
+        self.image_loader(filepath = r"misc\gui_design.png", x_loc = 0, y_loc = 0)
         
         self.animation_sequence()
 
@@ -222,7 +222,7 @@ class AnimeApp(tk.Tk):
                 label.delete("1.0", "end")
                 label.insert("end", "".join(string))
 
-                label.after(300, animate, i + 1)
+                label.after(240, animate, i + 1)
 
             animate()
 
@@ -242,14 +242,14 @@ class AnimeApp(tk.Tk):
         poem_animation.after(120, poem_animation.destroy)
 
         authors_name = self.typewritter_effect(text= authors[f"{random_int}"], font_size= 28, speed= "slow", break_line = 38, width_int = 25, height_int = 1, x_loc = 27, y_loc = 29, home_screen_return= False)
-        authors_message = self.typewritter_effect(text = messages[f"{random_int}"],font_size= 17, speed= "slow", break_line = 38, width_int = 40, height_int = 14, x_loc = 27, y_loc = 102, home_screen_return = False)
+        authors_message = self.typewritter_effect(text = messages[f"{random_int}"],font_size= 17, speed= "fast", break_line = 38, width_int = 40, height_int = 14, x_loc = 27, y_loc = 102, home_screen_return = False)
         human_incomplete_image = self.image_loader(filepath = r"misc\incomplete_resized.gif", x_loc= 26, y_loc = 459)
         neon_city_image = self.image_loader(filepath = r"misc\contender_resized.gif", x_loc= 456, y_loc = 24)
         map_city_image = self.image_loader(filepath=  r"misc\map_with_effect_resized.png", x_loc= 457, y_loc= 460)  
         fugitive_image = self.image_loader(filepath = r"misc\kav_effect_resized.png", x_loc = 846, y_loc = 26)
         fugitive_status = self.typewritter_effect(text = fugitive["1"], font_size= 15, break_line= 30, speed = "slow", height_int= 7, width_int= 32, x_loc= 997, y_loc= 28, home_screen_return = False)
         ghost_gif = self.image_loader(filepath = r"misc\ghost_image_resized.gif", x_loc = 845, y_loc = 200)
-        rolling_message = self.rolling_effect(text = rolling_type_message[f"{random_int}"], font_size = 38, width_int= 55, height_int = 1, x_loc= 27, y_loc= 724)
+        rolling_message = self.rolling_effect(text = rolling_type_message[f"{random_int}"], font_size = 38, width_int= 55, height_int = 1, x_loc= 27, y_loc= 748)
 
     def cbox(self, text:str, row:int, exploration:callable):
         """
@@ -541,7 +541,7 @@ class AnimeApp(tk.Tk):
 
         title_widget = self.typewritter_effect(text = response_name, font_size= 28, speed= "slow", break_line = 38, width_int = 25, height_int = 1, x_loc = 27, y_loc = 29, home_screen_return= True)
         image_widget = self.image_loader_url(url = response_image, x_resize = 364, y_resize = 325)
-        synopsis_widget = self.typewritter_effect(text = response_synopsis, font_size= 17, speed= "slow", break_line = 38, width_int = 40, height_int = 14, x_loc = 27, y_loc = 102, home_screen_return= True)
+        synopsis_widget = self.typewritter_effect(text = response_synopsis, font_size= 17, speed= "fast", break_line = 38, width_int = 40, height_int = 14, x_loc = 27, y_loc = 102, home_screen_return= True)
 
     def load_api_reviews(self, value:tk.StringVar):
         """
@@ -560,7 +560,7 @@ class AnimeApp(tk.Tk):
             text.append(f"Score: {review['score']}")
             text.append(f"Content: {review['review']}")
             text.append("__" * 30)
-        reviews_widget = self.typewritter_effect(text = "\n".join(text), font_size = 14, break_line= 152, speed= "fast", width_int= 152, height_int= 3, x_loc= 27, y_loc= 724, home_screen_return= True) # x_loc, y_loc done.
+        reviews_widget = self.typewritter_effect(text = "\n".join(text), font_size = 14, break_line= 152, speed= "fast", width_int= 152, height_int= 5, x_loc= 27, y_loc= 730, home_screen_return= True) # x_loc, y_loc done.
 
     def search_box(self):
 
@@ -666,16 +666,22 @@ class AnimeApp(tk.Tk):
                     window._tag = "delete_me"
 
                     sorted = pd.read_csv(filepath)
-                    
-                    tree = ttk.Treeview(window, columns=list(sorted.columns))
-                    tree.column("Title", width=600, stretch=False)
-                    tree._tag = "delete_me"
-                        
+                
+                    sorted.reset_index(drop=True, inplace=True)
+
+                    sorted.columns = ["Favorites"]
+
+                    tree = ttk.Treeview(window,columns=list(sorted.columns),show="headings")
+
+                    tree.column("#0", width=0, stretch=False)
+                    tree.column("Favorites", width=798, stretch=False)
+
                     for column in sorted.columns:
                         tree.heading(column, text=column)
-                    for _, row in sorted.iterrows():
-                        tree.insert("", "end", values=list(row))
-                        
+
+                    for row in sorted.itertuples(index=False):
+                        tree.insert("", "end", values=row)
+                                            
                     tree.pack(expand=True, fill='both')
 
                     tree.bind("<Double-1>", lambda event: self.recursive_event(tree.item(tree.identify_row(event.y))["values"][0]), add='+')
@@ -735,9 +741,7 @@ if __name__ == "__main__":
     app = AnimeApp()
     app.mainloop()
 
-# Needs to make sure the font is present in the system.
-# And also, fix the comment section, it's terrible. It may be an overhull needed.
-# Makes sure anime_processing runs begore launch. 
-
+# Make sure the font is present in os.
+# Add more messages.
 
 
