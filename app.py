@@ -559,7 +559,7 @@ class AnimeApp(tk.Tk):
             text.append(f"User: {review['user']['username'][:3] + '█' * 10}")
             text.append(f"Score: {review['score']}")
             text.append(f"Content: {review['review']}")
-            text.append("__" * 30)
+            text.append("__" * 72)
         reviews_widget = self.typewritter_effect(text = "\n".join(text), font_size = 14, break_line= 152, speed= "fast", width_int= 152, height_int= 5, x_loc= 27, y_loc= 730, home_screen_return= True) # x_loc, y_loc done.
 
     def search_box(self):
@@ -743,5 +743,7 @@ if __name__ == "__main__":
 
 # Make sure the font is present in os.
 # Add more messages.
+# A better way to storage and use those messages.
+# If the font is not in the system fall back to a regular font such as: arial and so forth!!!!
 
 

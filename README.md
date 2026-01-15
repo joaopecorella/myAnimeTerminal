@@ -2,6 +2,8 @@
 
 Welcome to **myAnimeTerminal**!
 
+![Aplication Screenshot!](misc/app_sc.png)
+
 If you ever felt like anime recommendations don't quite hit the mark… well, you are in the right place.  
 The sole purpose of this project is to use the **human component** as the main system to find related titles. Yes, it is quite simple, but there is more… To explain that to you,  
 I need you to understand the beginning. Before there was anything, God created the heavens and the earth, but we do not have to go that far.
