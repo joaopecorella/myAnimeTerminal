@@ -241,6 +241,8 @@ class AnimeApp(tk.Tk):
         title_animation.after(120, title_animation.destroy)
         poem_animation.after(120, poem_animation.destroy)
 
+        #messages[f"{random_int}"]
+
         authors_name = self.typewritter_effect(text= authors[f"{random_int}"], font_size= 28, speed= "slow", break_line = 38, width_int = 25, height_int = 1, x_loc = 27, y_loc = 29, home_screen_return= False)
         authors_message = self.typewritter_effect(text = messages[f"{random_int}"],font_size= 17, speed= "fast", break_line = 38, width_int = 40, height_int = 14, x_loc = 27, y_loc = 102, home_screen_return = False)
         human_incomplete_image = self.image_loader(filepath = r"misc\incomplete_resized.gif", x_loc= 26, y_loc = 459)
@@ -249,7 +251,7 @@ class AnimeApp(tk.Tk):
         fugitive_image = self.image_loader(filepath = r"misc\kav_effect_resized.png", x_loc = 846, y_loc = 26)
         fugitive_status = self.typewritter_effect(text = fugitive["1"], font_size= 15, break_line= 30, speed = "slow", height_int= 7, width_int= 32, x_loc= 997, y_loc= 28, home_screen_return = False)
         ghost_gif = self.image_loader(filepath = r"misc\ghost_image_resized.gif", x_loc = 845, y_loc = 200)
-        rolling_message = self.rolling_effect(text = rolling_type_message[f"{random_int}"], font_size = 38, width_int= 55, height_int = 1, x_loc= 27, y_loc= 748)
+        rolling_message = self.rolling_effect(text = rolling_type_message[f"{1}"], font_size = 38, width_int= 55, height_int = 1, x_loc= 27, y_loc= 748)
 
     def cbox(self, text:str, row:int, exploration:callable):
         """
@@ -292,7 +294,7 @@ class AnimeApp(tk.Tk):
             value (ttk.Combobox.get| tk.StringVar): The string selected from combobox.
         """
         # variables
-        selected = value
+        selected = str(value)
         data = self.state["anime_info"]
 
         # container
@@ -306,7 +308,7 @@ class AnimeApp(tk.Tk):
             sorted_data = filtered_data.sort_values("Completed_count", ascending = False)
             sorted_data.drop(["Unnamed: 0", "Anime_id", "Completed_count", "Genres"], axis = 1, inplace = True)
 
-            sorted_by_status = self.typewritter_effect(text = f"Sorted by: {selected}", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
+            sorted_by_status = self.typewritter_effect(text = f"> SYSTEM:: {selected.upper()}", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
             
             tree = ttk.Treeview(window, columns=list(sorted_data.columns), show="headings")
             tree._tag = "delete_me"
@@ -328,7 +330,7 @@ class AnimeApp(tk.Tk):
             sorted_data = filtered_data.sort_values("Completed_count", ascending = False)
             sorted_data.drop(["Unnamed: 0", "Anime_id", "Completed_count", "Genres"], axis = 1, inplace = True)
 
-            sorted_by_status = self.typewritter_effect(text = f"From: {selected}", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return = True)
+            sorted_by_status = self.typewritter_effect(text = f"> SYSTEM:: {selected.upper()}", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return = True)
 
             tree = ttk.Treeview(window, columns=list(sorted_data.columns), show="headings")
             tree._tag = "delete_me"
@@ -396,7 +398,7 @@ class AnimeApp(tk.Tk):
             user_query = selected
             choices = data["Title"]
 
-            what_did_you_mean_status = self.typewritter_effect(text = f"What did you mean? ", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
+            what_did_you_mean_status = self.typewritter_effect(text = f"> SYSTEM:: BEST MATCHES", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
             
             best_match = process.extract(user_query, choices)
             temp_names = []
@@ -605,6 +607,9 @@ class AnimeApp(tk.Tk):
             for w in self.winfo_children():
                 if getattr(w, "_tag", "") == "delete_me":
                     w.destroy()
+            
+            home_status = self.typewritter_effect(text =  "> SYSTEM:: HOME", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return = False)
+            home_status.after(600, home_status.destroy)
 
 
 
@@ -622,14 +627,14 @@ class AnimeApp(tk.Tk):
         Callback event. Informs the user if a title have been added into the favorites. Creates a CSV file with the user favorite animes. Updates the GUI directly.
         """
         # variables.
-        selected = value
+        selected = str(value)
         filepath = "saved_titles.csv"
         saved_files = []
         
         if selected:
 
-            favorite_status = self.typewritter_effect(text = f"{selected} has been favorited.", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
-            favorite_status.after(600, favorite_status.destroy)
+            favorite_status = self.typewritter_effect(text = f"> SYSTEM: {selected} ++", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
+            favorite_status.after(1200, favorite_status.destroy)
 
             if not os.path.isfile(filepath):
                 with open(file = filepath, mode = "w", newline = "") as file:
@@ -688,7 +693,7 @@ class AnimeApp(tk.Tk):
                     tree.bind("<Double-1>", lambda event: self.jikan_api(tree.item(tree.identify_row(event.y))["values"][0]), add='+')
 
                 else:
-                    favorite_status = self.typewritter_effect(text = f"No favorites yet.", font_size = 28, break_line= 50, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
+                    favorite_status = self.typewritter_effect(text = f"> SYSTEM:: NO FAVORITES", font_size = 28, break_line= 50, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
                     favorite_status.after(550, favorite_status.destroy)
                 
             
@@ -718,7 +723,7 @@ class AnimeApp(tk.Tk):
             if os.path.isfile(filepath):
                 os.remove(filepath)
             else:
-                favorite_status = self.typewritter_effect(text = f"No favorites to delete.", font_size = 28, break_line= 50, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
+                favorite_status = self.typewritter_effect(text = f"> SYSTEM:: NO FAVORITES", font_size = 28, break_line= 50, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return= True)
                 favorite_status.after(550, favorite_status.destroy)
 
         close_window_frame = tk.Label(self, borderwidth= 0 )
@@ -741,9 +746,8 @@ if __name__ == "__main__":
     app = AnimeApp()
     app.mainloop()
 
-# Make sure the font is present in os.
-# Add more messages.
-# A better way to storage and use those messages.
-# If the font is not in the system fall back to a regular font such as: arial and so forth!!!!
-
-
+# What are we missing?
+    # More messages!
+    # Add a message when going into the home screen!
+    # You might need to rewrite the second poem. 
+    # Fix messages.
