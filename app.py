@@ -251,7 +251,7 @@ class AnimeApp(tk.Tk):
         fugitive_image = self.image_loader(filepath = r"misc\kav_effect_resized.png", x_loc = 846, y_loc = 26)
         fugitive_status = self.typewritter_effect(text = fugitive["1"], font_size= 15, break_line= 30, speed = "slow", height_int= 7, width_int= 32, x_loc= 997, y_loc= 28, home_screen_return = False)
         ghost_gif = self.image_loader(filepath = r"misc\ghost_image_resized.gif", x_loc = 845, y_loc = 200)
-        rolling_message = self.rolling_effect(text = rolling_type_message[f"{1}"], font_size = 38, width_int= 55, height_int = 1, x_loc= 27, y_loc= 748)
+        rolling_message = self.rolling_effect(text = rolling_type_message[f"{random_int}"], font_size = 38, width_int= 55, height_int = 1, x_loc= 27, y_loc= 748)
 
     def cbox(self, text:str, row:int, exploration:callable):
         """
@@ -372,7 +372,7 @@ class AnimeApp(tk.Tk):
             user_data = recomendation_data.copy()
             user_data.drop(["Unnamed: 0", "Anime_id", "Completed_count", "Genres"], axis = 1, inplace = True)
 
-            similar_to_statues = self.typewritter_effect(text = f"Similar to: {selected}", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return = True)
+            similar_to_statues = self.typewritter_effect(text = f"> SYSTEM:: LIKE, {selected}", font_size = 28, break_line= 38, speed = "slow", width_int= 49, height_int= 1, x_loc= 462, y_loc= 388, home_screen_return = True)
 
 
             window = tk.Frame(master = self, borderwidth= 0.0)
@@ -745,9 +745,3 @@ class AnimeApp(tk.Tk):
 if __name__ == "__main__":
     app = AnimeApp()
     app.mainloop()
-
-# What are we missing?
-    # More messages!
-    # Add a message when going into the home screen!
-    # You might need to rewrite the second poem. 
-    # Fix messages.
